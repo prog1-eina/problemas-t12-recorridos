@@ -1,7 +1,7 @@
 ﻿/******************************************************************************\
  * Curso de Programación 1. Tema 9
  * Autores: Javier Martínez y Miguel Ángel Latre
- * Última revisión: 30 de octubre de 2020
+ * Última revisión: 24 de noviembre de 2020
  * Resumen: Soluciones a los problemas de Programación 1 planteados en la 
  *          sección «Recorridos de vectores de datos de tipos simples» de
  *          la clase de problemas del tema 12 (recorridos de vectores),

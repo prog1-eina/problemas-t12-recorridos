@@ -1,7 +1,7 @@
 ﻿/********************************************************************************\
  * Curso de Programación 1. Tema 12 (Algoritmos con vectores)
  * Autores: Miguel Ángel Latre
- * Última revisión: 27 de noviembre de 2019
+ * Última revisión: 24 de noviembre de 2020
  * Resumen: Soluciones a los problemas de Programación 1 planteados en la clase
  *          de problemas del recorrido de vectores
  * Codificación de caracteres original de este fichero: UTF-8 con BOM
