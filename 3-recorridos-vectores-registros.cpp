@@ -1,23 +1,28 @@
-﻿/********************************************************************************\
+﻿/******************************************************************************\
  * Curso de Programación 1. Tema 12 (Algoritmos con vectores)
  * Autores: Miguel Ángel Latre
  * Última revisión: 24 de noviembre de 2020
+ * Resumen: Soluciones a los problemas de Programación 1 planteados en la 
+ *          sección «Recorridos de vectores de registros» de
+ *          la clase de problemas del tema 12 (recorridos de vectores).
  * Resumen: Soluciones a los problemas de Programación 1 planteados en la clase
  *          de problemas del recorrido de vectores
- * Codificación de caracteres original de este fichero: UTF-8 con BOM
-\********************************************************************************/
+ * Dependencias: módulo «permiso», ubicado en el directorio
+ *               del repositorio de los problemas del tema 11 (registros).
+\******************************************************************************/
 
-#include "permiso.h"
+#include "permiso.hpp"
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
  * Post: Ha devuelto el número de permisos de conducir de las primeras «n»
- *       componentes del vector «v» con una cantidad de puntos negativa o igual a 0.
+ *       componentes del vector «v» con una cantidad de puntos negativa o igual 
+ *       a 0.
  */
-int contarSinPuntos(const Permiso v[], const int n) {
+unsigned int contarSinPuntos(const Permiso v[], const unsigned int n) {
     // Esquema de recorrido del vector, contando permisos sin puntos
-    int cuenta = 0;
-    for (int i = 0; i < n; i++) {
+    unsigned int cuenta = 0;
+    for (unsigned int i = 0; i < n; i++) {
         if (puntos(v[i]) <= 0) {
             cuenta++;
         }
@@ -28,14 +33,14 @@ int contarSinPuntos(const Permiso v[], const int n) {
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Ha devuelto el permiso de conducir de entre las primeras «n» componentes del
- *       vector «v» que tiene el menor saldo de puntos.
+ * Post: Ha devuelto el permiso de conducir de entre las primeras «n»
+ *       componentes del vector «v» que tiene el menor saldo de puntos.
  */
-Permiso peorConductor(const Permiso v[], const int n) {
+Permiso peorConductor(const Permiso v[], const unsigned int n) {
     // Esquema de búsqueda de un mínimo en el vector, buscando un mínimo
-    int indPeor = 0;
+    unsigned int indPeor = 0;
     int puntosPeor = puntos(v[0]);
-    for (int i = 1; i < n; i++) {
+    for (unsigned int i = 1; i < n; i++) {
         int puntosI = puntos(v[i]);
         if (puntosI < puntosPeor) {
             indPeor = i;
@@ -49,13 +54,13 @@ Permiso peorConductor(const Permiso v[], const int n) {
 /*
  * Pre:  «v» tiene al menos «n» componentes.
  * Post: Ha devuelto un índice de una componente de entre las primeras «n»
- *       componentes del vector «v» que contiene un permiso con un «puntosBuscados»
- *       puntos, o un valor negativo si no existe ninguno en el vector.
+ *       componentes del vector «v» que contiene un permiso con un
+ *       «puntosBuscados» puntos, o un valor negativo si no existe ninguno en el vector.
  */
-int buscarPorPuntos(const Permiso v[], const int n, const int puntosBuscados) {
+int buscarPorPuntos(const Permiso v[], const unsigned int n, const int puntosBuscados) {
     // Esquema de búsqueda sin garantía de éxito
     bool encontrado = false;
-    int i = 0;
+    unsigned int i = 0;
     while (!encontrado && i < n) {
         if (puntos(v[i]) == puntosBuscados) {
             encontrado = true;
@@ -78,11 +83,11 @@ int buscarPorPuntos(const Permiso v[], const int n, const int puntosBuscados) {
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Ha recorrido las primeras «n» componentes el vector «v» y ha aumentado la
- *       antigüedad de todos los permisos en un mes.
+ * Post: Ha recorrido las primeras «n» componentes el vector «v» y ha aumentado
+ *       la antigüedad de todos los permisos en un mes.
  */
-void actualizarMes(Permiso v[], const int n) {
-    for (int i = 0; i < n; i++) {
+void actualizarMes(Permiso v[], const unsigned int n) {
+    for (unsigned int i = 0; i < n; i++) {
         v[i].antiguedadMeses++;
     }
 }
@@ -91,18 +96,18 @@ void actualizarMes(Permiso v[], const int n) {
 /*
  * Pre:  «v» tiene al menos «n» componentes.
  * Post: Ha recorrido las primeras «n» componentes el vector «v» y, cuando ha
- *       encontrado permisos en ellas correspondientes a conductores que han dejado
- *       de ser noveles (conductores con exactamente 12 meses de antigüedad), les ha
- *       bonificado con 4 puntos.
+ *       encontrado permisos en ellas correspondientes a conductores que han
+ *       dejado de ser noveles (conductores con exactamente 12 meses de
+ *       antigüedad), les ha bonificado con 4 puntos.
  *       Ha devuelto el número de permisos de conductores a los que se ha
  *       bonificado por dejar de ser noveles.
  */
-int bonificarPorDejarDeSerNovel(Permiso v[], const int n) {
-    int cuenta = 0;
+unsigned int bonificarPorDejarDeSerNovel(Permiso v[], const unsigned int n) {
+    unsigned int cuenta = 0;
 
     // Recorrido del vector buscando conductores con exactamente 24 meses de
     // antigüedad, bonificándolos con 4 puntos y contándolos.
-    for (int i = 0; i < n; i++) {
+    for (unsigned int i = 0; i < n; i++) {
         if (v[i].antiguedadMeses == MESES_NOVEL) {
             registrarBonificacion(v[i], 4);
             cuenta++;
@@ -113,19 +118,21 @@ int bonificarPorDejarDeSerNovel(Permiso v[], const int n) {
 
 
 /*
- * Pre:  «v» tiene al menos «nV» componentes y el vector «resultado», al menos «nV»
- *       componentes.
+ * Pre:  Los vectores «v» y  «resultado» tienen al menos «nV» componentes cada
+ *       uno.
  * Post: El vector «resultado» contiene, en sus primeras «nR»
- *       componentes, únicamente aquellos permisos de las primeras «nV» componentes
- *       del vector «v» que tienen un saldo de puntos estrictamente positivo.
+ *       componentes, únicamente aquellos permisos de las primeras «nV»
+ *       componentes del vector «v» que tienen un saldo de puntos estrictamente
+ *       positivo.
  */
-void purgar(const Permiso v[], const int nV, Permiso resultado[], int& nR) {
+void purgar(const Permiso v[], const unsigned int nV, Permiso resultado[],
+            unsigned int& nR) {
     nR = 0; // Cuenta el número de permisos con puntos positivos y va a servir
             // como cursor para indexar el vector «resultado».
 
     // Recorrido del vector «v», copiando los permisos con puntos
     // positivos a el vector «resultado».
-    for (int i = 0; i < nV; i++) {
+    for (unsigned int i = 0; i < nV; i++) {
         if (puntos(v[i]) > 0) {
             resultado[nR] = v[i];
             nR++;
@@ -136,18 +143,18 @@ void purgar(const Permiso v[], const int nV, Permiso resultado[], int& nR) {
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Ha devuelto «true» si y solo si las primeras «n» componentes del vector «v»
- *       están ordenadas de forma que los permisos de sus componentes tienen
+ * Post: Ha devuelto «true» si y solo si las primeras «n» componentes del vector
+ *       «v» están ordenadas de forma que los permisos de sus componentes tienen
  *       valores de puntos no decrecientes.
  */
-bool estaOrdenadaPorPuntos(const Permiso v[], const int n) {
+bool estaOrdenadaPorPuntos(const Permiso v[], const unsigned int n) {
     /*
      * Resolución del problema como la búsqueda de un par de componentes
      * consecutivas en las que la primera corresponde a un conductor con
      * más puntos que el de la componente siguiente. Si se encuentra tal
      * par, no esta ordenada. En caso contrario, sí está ordenada
      */
-    int i = 0;
+    unsigned int i = 0;
     int puntosActual = puntos(v[0]);
     bool ordenada = true;
     while (ordenada && i < n - 1) {
@@ -163,13 +170,14 @@ bool estaOrdenadaPorPuntos(const Permiso v[], const int n) {
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Ha devuelto true si y solo si las primeras «n» componentes del vector «v»
- *       están clasificadas de forma tal que todos los permisos correspondientes a
- *       conductores noveles aparecen primero (en las componentes de índices más
- *       bajos) y todos los correspondientes a conductores experimentados, después
- *       (en las componentes de índices más altos).
+ * Post: Ha devuelto true si y solo si las primeras «n» componentes del vector
+ *       «v» están clasificadas de forma tal que todos los permisos
+ *       correspondientes a conductores noveles aparecen primero (en las
+ *       componentes de índices más bajos) y todos los correspondientes a
+ *       conductores experimentados, después (en las componentes de índices más
+ *       altos).
  */
-bool estaOrdenadaPorNovel(const Permiso v[], const int n) {
+bool estaOrdenadaPorNovel(const Permiso v[], const unsigned int n) {
     /*
      * Resolución del problema como la búsqueda de un par de componentes
      * consecutivas en las que la primera corresponde a un conductor
@@ -177,7 +185,7 @@ bool estaOrdenadaPorNovel(const Permiso v[], const int n) {
      * encuentra tal par, no esta ordenada. En caso contrario, sí está
      * ordenada
      */
-    int i = 0;
+    unsigned int i = 0;
     bool ordenada = true;
     while (ordenada && i < n - 1) {
         ordenada = !(!esNovel(v[i]) && esNovel(v[i + 1]));
@@ -202,14 +210,14 @@ void permutar(Permiso& uno, Permiso& otro) {
 /*
  * Pre:  «v» tiene al menos «n» componentes.
  * Post: Las primeras «n» componentes del vector «v» son una permutación de los
- *       permisos que había inicialmente en esas mismas primeras «n» componentes del
- *       vector «v» y están clasificadas de forma que todos los permisos
+ *       permisos que había inicialmente en esas mismas primeras «n» componentes
+ *       del vector «v» y están clasificadas de forma que todos los permisos
  *       correspondientes a conductores noveles aparecen primero (en las
  *       componentes de índices más bajos) y todos los correspondientes a
  *       conductores experimentados, después (en las componentes de índices más
  *       altos).
  */
-void clasificararPorNovel(Permiso v[], const int n) {
+void clasificarPorNovel(Permiso v[], const unsigned int n) {
     /*
      * INV1: Todas las componentes de índice menor que «inferior» corresponden a
      *       conductores noveles.
@@ -238,17 +246,17 @@ void clasificararPorNovel(Permiso v[], const int n) {
             inferior++;
         } else if (!esNovel(v[superior])) {
             /*
-             * Como v[superior] corresponde a un conductor experimentado, se puede
-             * decrementar en 1 el valor de «superior» y se seguirá cumpliendo
-             * INV2.
+             * Como v[superior] corresponde a un conductor experimentado, se
+             * puede decrementar en 1 el valor de «superior» y se seguirá
+             * cumpliendo INV2.
              */
             superior--;
         } else {
             /*
              * Se cumple !esNovel(v[inferior]) && esNovel(v[superior])
              *
-             * En la componente de índice «inferior» hay un experimentado y en la
-             * de índice «superior» hay un novel. Podemos intercambiarlos,
+             * En la componente de índice «inferior» hay un experimentado y en
+             * la de índice «superior» hay un novel. Podemos intercambiarlos,
              * incrementar «inferior», decrementar «superior» y se seguirá
              * cumpliendo INV1 e INV2.
              */
@@ -259,34 +267,35 @@ void clasificararPorNovel(Permiso v[], const int n) {
     }
     /*
      * Al acabar el bucle, se siguen cumpliendo INV1, INV2, INV3.
-     * Además, inferior >= superior, con lo que el intervalo [inferior, superior]
-     * que se menciona en INV3 se refiere a uno o ningún índice: "Todas las
-     * componentes de índice menor que «inferior» corresponden a conductores
-     * noveles; todas las componentes de índice mayor que «superior» corresponden
-     * a conductores experimentados y en v[inferior] hay un conductor novel o
-     * experimentado".
+     * Además, inferior >= superior, con lo que el intervalo
+     * [inferior, superior] que se menciona en INV3 se refiere a uno o ningún
+     * índice: "Todas lascomponentes de índice menor que «inferior» corresponden
+     * a conductores noveles; todas las componentes de índice mayor que
+     * «superior» corresponden a conductores experimentados y en v[inferior] hay
+     * un conductor novel o experimentado".
      *
      * Esto quiere decir que se cumple la postcondición: "Todos los permisos
-     * correspondientes a conductores noveles aparecen primero (en las componentes
-     * de índices más bajas) y todos los correspondientes a conductores
-     * experimentados, después (en las componentes de índices más altas)".
+     * correspondientes a conductores noveles aparecen primero (en las
+     * componentes de índices más bajas) y todos los correspondientes a
+     * conductores experimentados, después (en las componentes de índices más
+     * altas)".
      */
 }
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
  * Post: Las primeras «n» componentes del vector «v» son una permutación de los
- *       permisos que había inicialmente en esas mismas primeras «n» componentes del
- *       vector «v» y están ordenadas de forma que tienen valores de puntos no
- *       decrecientes.
+ *       permisos que había inicialmente en esas mismas primeras «n» componentes
+ *       del vector «v» y están ordenadas de forma que tienen valores de puntos
+ *       no decrecientes.
  */
-void ordenarPorPuntos(Permiso v[], const int n) {
+void ordenarPorPuntos(Permiso v[], const unsigned int n) {
     // Aplica el método de ordenación interna de vectores por selección directa.
-    for (int i = 0; i < n - 1; i++) {
+    for (unsigned int i = 0; i < n - 1; i++) {
         // Determina el índice «iMenor» del menor de los datos almacenados en el
         // subvector v[i, n - 1].
-        int iMenor = i;
-        for (int j = i + 1; j < n; j++) {
+        unsigned int iMenor = i;
+        for (unsigned int j = i + 1; j < n; j++) {
             if (puntos(v[j]) < puntos(v[iMenor])) {
                 iMenor = j;
             }
