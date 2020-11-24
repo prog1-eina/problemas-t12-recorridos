@@ -1,5 +1,5 @@
 ﻿/******************************************************************************\
- * Curso de Programación 1. Tema 9
+ * Curso de Programación 1. Tema 12 (Algoritmos con vectores)
  * Autores: Javier Martínez y Miguel Ángel Latre
  * Última revisión: 24 de noviembre de 2020
  * Resumen: Soluciones a los problemas de Programación 1 planteados en la 
