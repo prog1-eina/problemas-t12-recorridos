@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Programación 1",
+            "includePath": [
+                "${workspaceFolder}/../problemas-t11-registros/permisos-conducir/**"
+            ]
+        }
+    ],
+    "version": 4
+}
