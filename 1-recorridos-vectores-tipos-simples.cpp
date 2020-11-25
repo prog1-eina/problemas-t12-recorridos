@@ -38,21 +38,27 @@ bool estaOrdenada(const int v[], const unsigned int n) {
 
 
 /********************************** Problema 2 ********************************/
-/*
- * Pre:  El vector «v» tiene al menos «n» componentes; sea Np
- *       el número de datos positivos del vector «v»: el vector «p» tiene
- *       al menos Np componentes. El valor del parámetro «numPositivos» no
- *       está definido.
- * Post: Las primeras Np componentes del vector «p» almacenan los Np
- *       datos positivos de las primeras «n» componentes del vector «T» y
- *       numPositivos = Np.
+/* Pre:  Los vectores «v» y «p» tienen al menos «n» componentes cada uno; el 
+ *       valor del parámetro «numPositivos» no está definido.
+ * Post: Tras ejecutar esta función, «numPositivos» es igual al número de datos
+ *       positivos que hay en el vector «v» y las primeras «numPositivos»
+ *       componentes del vector «p» almacenan los datos positivos de las
+ *       primeras «n» componentes del vector «v».
+ * 
+ *       Por ejemplo, si se invoca a esta función en el siguiente entorno:
+ *           int vector[9] = {3, 0, 5, -1, 2, -6, -4, 8, -9};
+ *           int positivos[9];
+ *           unsigned int numPos;
+ *           copiaPositivos(vector, 9, positivos, numPos);
+ *       tras ejecutar la función, numPos = 5 y el vector «positivos»
+ *       almacenaría en sus primeras 5 componentes los datos {3, 0, 5, 2, 8}.
  */
-void copiaPositivos(const int T[], const unsigned int n,
-                    int P[], unsigned int& numPositivos) {
+void copiaPositivos(const int v[], const unsigned int n, 
+                    int p[], unsigned int& numPositivos) {
     numPositivos = 0;
     for (unsigned int i = 0; i < n; i++) {
-        if (T[i] > 0) {
-            P[numPositivos] = T[i];
+        if (v[i] > 0) {
+            p[numPositivos] = v[i];
             numPositivos++;
         }
     }
