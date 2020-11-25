@@ -1,7 +1,7 @@
 ﻿/******************************************************************************\
  * Curso de Programación 1. Tema 12
  * Autores: Miguel Ángel Latre
- * Última revisión: 24 de noviembre de 2020
+ * Última revisión: 25 de noviembre de 2020
  * Resumen: Soluciones a los problemas de Programación 1 planteados en la 
  *          sección «Recorridos de vectores de datos de tipos simples» de
  *          la clase de problemas del tema 12 (recorridos de vectores),
@@ -41,7 +41,7 @@ unsigned int contarLetras(const string cad) {
  * Pre:  Todos los caracteres de «cadena» son letras del alfabeto inglés.
  * Post: Ha devuelto el número de palabras individuales que forman «cadena»
  */
-unsigned int numeroPalabrasEnCamelCase(string cadena) {
+unsigned int numeroPalabrasEnCamelCase(const string cadena) {
     if (cadena.length() == 0) {
         return 0;
     }
