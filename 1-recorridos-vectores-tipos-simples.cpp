@@ -1,7 +1,7 @@
 ﻿/******************************************************************************\
  * Curso de Programación 1. Tema 12 (Algoritmos con vectores)
  * Autores: Javier Martínez y Miguel Ángel Latre
- * Última revisión: 24 de noviembre de 2020
+ * Última revisión: 25 de noviembre de 2020
  * Resumen: Soluciones a los problemas de Programación 1 planteados en la 
  *          sección «Recorridos de vectores de datos de tipos simples» de
  *          la clase de problemas del tema 12 (recorridos de vectores),
@@ -39,20 +39,18 @@ bool estaOrdenada(const int v[], const unsigned int n) {
 
 /********************************** Problema 2 ********************************/
 /*
- * Pre:  El vector «v» tiene al menos «n» componentes; sea Np
- *       el número de datos positivos del vector «v»: el vector «p» tiene
- *       al menos Np componentes. El valor del parámetro «numPositivos» no
- *       está definido.
- * Post: Las primeras Np componentes del vector «p» almacenan los Np
- *       datos positivos de las primeras «n» componentes del vector «T» y
- *       numPositivos = Np.
+ * Pre:  Los vectores «v» y «p» tienen al menos «n» componentes cada uno. 
+ *       El valor del parámetro «numPositivos» no está definido.   
+ * Post: Tras ejecutar esta función, «numPositivos» es igual al número de datos
+ *       positivos que hay en el vector «v» y las primeras «numPositivos» componentes
+ *       del vector «p» almacenan los datos positivos de «v».
  */
-void copiaPositivos(const int T[], const unsigned int n,
-                    int P[], unsigned int& numPositivos) {
+void copiaPositivos(const int v[], const unsigned int n,
+                    int p[], unsigned int& numPositivos) {
     numPositivos = 0;
     for (unsigned int i = 0; i < n; i++) {
-        if (T[i] > 0) {
-            P[numPositivos] = T[i];
+        if (v[i] > 0) {
+            p[numPositivos] = v[i];
             numPositivos++;
         }
     }
