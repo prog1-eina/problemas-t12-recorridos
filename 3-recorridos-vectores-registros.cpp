@@ -32,7 +32,7 @@ unsigned int contarSinPuntos(const Permiso v[], const unsigned int n) {
 
 
 /*
- * Pre:  «v» tiene al menos «n» componentes.
+ * Pre:  «v» tiene al menos «n» componentes y «n» > 0.
  * Post: Ha devuelto el permiso de conducir de entre las primeras «n»
  *       componentes del vector «v» que tiene el menor saldo de puntos.
  */
@@ -148,6 +148,11 @@ void purgar(const Permiso v[], const unsigned int nV, Permiso resultado[],
  *       valores de puntos no decrecientes.
  */
 bool estaOrdenadaPorPuntos(const Permiso v[], const unsigned int n) {
+    if (n == 0) {
+        // Hay cero componentes y está trivialmente ordendada
+        return true;
+    }
+    else {
     /*
      * Resolución del problema como la búsqueda de un par de componentes
      * consecutivas en las que la primera corresponde a un conductor con
@@ -166,6 +171,7 @@ bool estaOrdenadaPorPuntos(const Permiso v[], const unsigned int n) {
     // i >= n-1 || !ordenada
     return ordenada;
 }
+}
 
 
 /*
@@ -181,14 +187,14 @@ bool estaOrdenadaPorNovel(const Permiso v[], const unsigned int n) {
     /*
      * Resolución del problema como la búsqueda de un par de componentes
      * consecutivas en las que la primera corresponde a un conductor
-     * experimentado y la siguiente a un conductor novel. Si se
+     * experimentado y la segunda a un conductor novel. Si se
      * encuentra tal par, no esta ordenada. En caso contrario, sí está
      * ordenada
      */
-    unsigned int i = 0;
+    unsigned int i = 1;
     bool ordenada = true;
-    while (ordenada && i < n - 1) {
-        ordenada = !(!esNovel(v[i]) && esNovel(v[i + 1]));
+    while (ordenada && i < n) {
+        ordenada = !(!esNovel(v[i - 1]) && esNovel(v[i]));
         i++;
     }
     // i >= n-1 || !ordenada
@@ -290,21 +296,24 @@ void clasificarPorNovel(Permiso v[], const unsigned int n) {
  *       no decrecientes.
  */
 void ordenarPorPuntos(Permiso v[], const unsigned int n) {
-    // Aplica el método de ordenación interna de vectores por selección directa.
-    for (unsigned int i = 0; i < n - 1; i++) {
-        // Determina el índice «iMenor» del menor de los datos almacenados en el
-        // subvector v[i, n - 1].
-        unsigned int iMenor = i;
-        for (unsigned int j = i + 1; j < n; j++) {
-            if (puntos(v[j]) < puntos(v[iMenor])) {
-                iMenor = j;
+    if (n != 0) {
+        // Aplica el método de ordenación de vectores por selección directa.
+        for (unsigned int i = 0; i < n - 1; i++) {
+            // Determina el índice «iMenor» del menor de los datos almacenados
+            //  en el subvector v[i, n - 1].
+            unsigned int iMenor = i;
+            for (unsigned int j = i + 1; j < n; j++) {
+                if (puntos(v[j]) < puntos(v[iMenor])) {
+                    iMenor = j;
+                }
             }
-        }
 
-        // Permuta los valores de v[i] y v[iMenor]
-        permutar(v[i], v[iMenor]);
+            // Permuta los valores de v[i] y v[iMenor]
+            permutar(v[i], v[iMenor]);
+        }
     }
 }
+
 
 /*
  * Función main para que el proyecto compile sin errores. Puede utilizarse para

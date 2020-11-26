@@ -28,9 +28,9 @@ bool estaOrdenada(const int v[], const unsigned int n) {
     // encontrado un par de componentes consecutivas en el orden
     // incorrecto.
     bool ordenada = true;
-    unsigned int i = 0;
-    while (ordenada && i < n - 1) {
-        ordenada = (v[i] <= v[i + 1]);
+    unsigned int i = 1;
+    while (ordenada && i < n) {
+        ordenada = (v[i - 1] <= v[i]);
         i++;
     }
     return ordenada;
@@ -84,7 +84,7 @@ unsigned int numeroRepeticiones(const int v[], const unsigned int i,
 
 
 /*
- * Pre:  El vector «v» tiene «n» componentes.
+ * Pre:  El vector «v» tiene «n» componentes y «n» > 0.
  * Post: Ha devuelto la moda de los datos almacenados en el vector «v».
  */
 int moda(const int v[], const unsigned int n) {
@@ -210,11 +210,12 @@ void pruebaModa() {
     cout << boolalpha;
 
     const int T1[] = {4, 7, 5, 5, 1, 7, 6, 9, 2, 2, 5, 0, 7, 9, 5, 6, 5, 0, 8, 0, 2};
-    cout << (moda(T1, 21) == 5) << endl;
+    int modaT1 = moda(T1, 21);
+    cout << (modaT1 == 5) << endl;
 
     const int T2[] = {1, 5, 8, 6, 8, 3, 4, 6, 6, 1, 5, 8, 1, 9, 5, 9, 5, 8, 9, 2, 9};
-    int m = moda(T2, 21);
-    cout << (m == 5 || m == 8 || m == 9) << endl;
+    int modaT2 = moda(T2, 21);
+    cout << (modaT2 == 5 || modaT2 == 8 || modaT2 == 9) << endl;
 }
 
 
