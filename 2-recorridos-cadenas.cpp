@@ -9,7 +9,7 @@
  *          (cadenas de caracteres).
  * Nota: Este fichero contiene un programa completo que realiza pruebas de las
  *       funciones solicitadas. Este fichero puede compilarse y ejecutarse con
- *       la extensión Run Code de Visual Studio Code, tal y como se hacía en las
+ *       la extensión Code Runner de Visual Studio Code, tal y como se hacía en las
  *       prácticas 1 y 2. 
 \******************************************************************************/
 
