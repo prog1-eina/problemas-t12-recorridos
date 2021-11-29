@@ -1,0 +1,34 @@
+{
+    "tasks": [
+        {
+            "label": "Compilar «recorridos»",
+            "type": "shell",
+            "command": "make",
+            "windows": {
+                "command": "mingw32-make.exe",
+            },
+            "args": [
+                "recorridos"
+            ],
+            "problemMatcher": ["$gcc"],
+            "group": "build",
+        },
+        {
+            "label": "Ejecutar «recorridos»",
+            "type": "shell",
+            "command": "bin/recorridos",
+            "windows": {
+                "command": "chcp 65001 ; bin\\recorridos.exe",
+            },
+            "dependsOn": "Compilar «recorridos»",
+            "problemMatcher": ["$gcc"],
+        },
+    ],
+    "presentation": {
+        "showReuseMessage": true,
+        "panel": "shared",
+        "reveal": "always",
+        "focus": true,
+    },
+    "version": "2.0.0"
+}
