@@ -9,9 +9,23 @@
  *          de problemas del recorrido de vectores
  * Dependencias: módulo «permiso», ubicado en el directorio
  *               del repositorio de los problemas del tema 11 (registros).
+ * Nota: El código de este programa está repartido en varios módulos.
+ *       Para compilarlo, hay que ejecutar el comando
+ *           make recorridos
+ *       o, en Windows,
+ *           mingw32-make recorridos
+ *       o ejecutar la tarea "Compilar «recorridos»" de VSC.
+ * 
+ *       Para ejecutarlo, una vez compilado, hay que ejecutar el comando
+ *           bin/recorridos
+ *       o, en Windows,
+ *           bin\recorridos.exe
+ *       o ejecutar la tarea "Ejecutar «recorridos»" de VSC.
 \******************************************************************************/
 
 #include "permiso.hpp"
+#include <iostream>
+using namespace std;
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
@@ -19,10 +33,10 @@
  *       componentes del vector «v» con una cantidad de puntos negativa o igual 
  *       a 0.
  */
-unsigned int contarSinPuntos(const Permiso v[], const unsigned int n) {
+unsigned contarSinPuntos(const Permiso v[], const unsigned n) {
     // Esquema de recorrido del vector, contando permisos sin puntos
-    unsigned int cuenta = 0;
-    for (unsigned int i = 0; i < n; i++) {
+    unsigned cuenta = 0;
+    for (unsigned i = 0; i < n; i++) {
         if (puntos(v[i]) <= 0) {
             cuenta++;
         }
@@ -36,11 +50,11 @@ unsigned int contarSinPuntos(const Permiso v[], const unsigned int n) {
  * Post: Ha devuelto el permiso de conducir de entre las primeras «n»
  *       componentes del vector «v» que tiene el menor saldo de puntos.
  */
-Permiso peorConductor(const Permiso v[], const unsigned int n) {
+Permiso peorConductor(const Permiso v[], const unsigned n) {
     // Esquema de búsqueda de un mínimo en el vector, buscando un mínimo
-    unsigned int indPeor = 0;
+    unsigned indPeor = 0;
     int puntosPeor = puntos(v[0]);
-    for (unsigned int i = 1; i < n; i++) {
+    for (unsigned i = 1; i < n; i++) {
         int puntosI = puntos(v[i]);
         if (puntosI < puntosPeor) {
             indPeor = i;
@@ -57,10 +71,10 @@ Permiso peorConductor(const Permiso v[], const unsigned int n) {
  *       componentes del vector «v» que contiene un permiso con un
  *       «puntosBuscados» puntos, o un valor negativo si no existe ninguno en el vector.
  */
-int buscarPorPuntos(const Permiso v[], const unsigned int n, const int puntosBuscados) {
+int buscarPorPuntos(const Permiso v[], const unsigned n, const int puntosBuscados) {
     // Esquema de búsqueda sin garantía de éxito
     bool encontrado = false;
-    unsigned int i = 0;
+    unsigned i = 0;
     while (!encontrado && i < n) {
         if (puntos(v[i]) == puntosBuscados) {
             encontrado = true;
@@ -86,8 +100,8 @@ int buscarPorPuntos(const Permiso v[], const unsigned int n, const int puntosBus
  * Post: Ha recorrido las primeras «n» componentes el vector «v» y ha aumentado
  *       la antigüedad de todos los permisos en un mes.
  */
-void actualizarMes(Permiso v[], const unsigned int n) {
-    for (unsigned int i = 0; i < n; i++) {
+void actualizarMes(Permiso v[], const unsigned n) {
+    for (unsigned i = 0; i < n; i++) {
         v[i].antiguedadMeses++;
     }
 }
@@ -102,12 +116,12 @@ void actualizarMes(Permiso v[], const unsigned int n) {
  *       Ha devuelto el número de permisos de conductores a los que se ha
  *       bonificado por dejar de ser noveles.
  */
-unsigned int bonificarPorDejarDeSerNovel(Permiso v[], const unsigned int n) {
-    unsigned int cuenta = 0;
+unsigned bonificarPorDejarDeSerNovel(Permiso v[], const unsigned n) {
+    unsigned cuenta = 0;
 
     // Recorrido del vector buscando conductores con exactamente 24 meses de
     // antigüedad, bonificándolos con 4 puntos y contándolos.
-    for (unsigned int i = 0; i < n; i++) {
+    for (unsigned i = 0; i < n; i++) {
         if (v[i].antiguedadMeses == MESES_NOVEL) {
             registrarBonificacion(v[i], 4);
             cuenta++;
@@ -125,14 +139,14 @@ unsigned int bonificarPorDejarDeSerNovel(Permiso v[], const unsigned int n) {
  *       componentes del vector «v» que tienen un saldo de puntos estrictamente
  *       positivo.
  */
-void purgar(const Permiso v[], const unsigned int nV, Permiso resultado[],
-            unsigned int& nR) {
+void purgar(const Permiso v[], const unsigned nV, Permiso resultado[],
+            unsigned& nR) {
     nR = 0; // Cuenta el número de permisos con puntos positivos y va a servir
             // como cursor para indexar el vector «resultado».
 
     // Recorrido del vector «v», copiando los permisos con puntos
     // positivos a el vector «resultado».
-    for (unsigned int i = 0; i < nV; i++) {
+    for (unsigned i = 0; i < nV; i++) {
         if (puntos(v[i]) > 0) {
             resultado[nR] = v[i];
             nR++;
@@ -147,7 +161,7 @@ void purgar(const Permiso v[], const unsigned int nV, Permiso resultado[],
  *       «v» están ordenadas de forma que los permisos de sus componentes tienen
  *       valores de puntos no decrecientes.
  */
-bool estaOrdenadaPorPuntos(const Permiso v[], const unsigned int n) {
+bool estaOrdenadaPorPuntos(const Permiso v[], const unsigned n) {
     if (n == 0) {
         // Hay cero componentes y está trivialmente ordendada
         return true;
@@ -159,7 +173,7 @@ bool estaOrdenadaPorPuntos(const Permiso v[], const unsigned int n) {
      * más puntos que el de la componente siguiente. Si se encuentra tal
      * par, no esta ordenada. En caso contrario, sí está ordenada
      */
-    unsigned int i = 0;
+    unsigned i = 0;
     int puntosActual = puntos(v[0]);
     bool ordenada = true;
     while (ordenada && i < n - 1) {
@@ -183,7 +197,7 @@ bool estaOrdenadaPorPuntos(const Permiso v[], const unsigned int n) {
  *       conductores experimentados, después (en las componentes de índices más
  *       altos).
  */
-bool estaOrdenadaPorNovel(const Permiso v[], const unsigned int n) {
+bool estaOrdenadaPorNovel(const Permiso v[], const unsigned n) {
     /*
      * Resolución del problema como la búsqueda de un par de componentes
      * consecutivas en las que la primera corresponde a un conductor
@@ -191,7 +205,7 @@ bool estaOrdenadaPorNovel(const Permiso v[], const unsigned int n) {
      * encuentra tal par, no esta ordenada. En caso contrario, sí está
      * ordenada
      */
-    unsigned int i = 1;
+    unsigned i = 1;
     bool ordenada = true;
     while (ordenada && i < n) {
         ordenada = !(!esNovel(v[i - 1]) && esNovel(v[i]));
@@ -223,7 +237,7 @@ void permutar(Permiso& uno, Permiso& otro) {
  *       conductores experimentados, después (en las componentes de índices más
  *       altos).
  */
-void clasificarPorNovel(Permiso v[], const unsigned int n) {
+void clasificarPorNovel(Permiso v[], const unsigned n) {
     /*
      * INV1: Todas las componentes de índice menor que «inferior» corresponden a
      *       conductores noveles.
@@ -295,14 +309,14 @@ void clasificarPorNovel(Permiso v[], const unsigned int n) {
  *       del vector «v» y están ordenadas de forma que tienen valores de puntos
  *       no decrecientes.
  */
-void ordenarPorPuntos(Permiso v[], const unsigned int n) {
+void ordenarPorPuntos(Permiso v[], const unsigned n) {
     if (n != 0) {
         // Aplica el método de ordenación de vectores por selección directa.
-        for (unsigned int i = 0; i < n - 1; i++) {
+        for (unsigned i = 0; i < n - 1; i++) {
             // Determina el índice «iMenor» del menor de los datos almacenados
             //  en el subvector v[i, n - 1].
-            unsigned int iMenor = i;
-            for (unsigned int j = i + 1; j < n; j++) {
+            unsigned iMenor = i;
+            for (unsigned j = i + 1; j < n; j++) {
                 if (puntos(v[j]) < puntos(v[iMenor])) {
                     iMenor = j;
                 }
@@ -320,5 +334,6 @@ void ordenarPorPuntos(Permiso v[], const unsigned int n) {
  * escribir un programa de prueba de las funciones anteriores.
  */
 int main() {
+    cout << "Puedes escribir el programa de prueba" << endl;
     return 0;
 }
