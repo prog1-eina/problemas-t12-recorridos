@@ -167,24 +167,24 @@ bool estaOrdenadoPorPuntos(const Permiso v[], const unsigned n) {
         return true;
     }
     else {
-    /*
-     * Resolución del problema como la búsqueda de un par de componentes
-     * consecutivas en las que la primera corresponde a un conductor con
-     * más puntos que el de la componente siguiente. Si se encuentra tal
-     * par, no esta ordenado. En caso contrario, sí está ordenado.
-     */
-    unsigned i = 0;
-    int puntosActual = puntos(v[0]);
-    bool ordenado = true;
-    while (ordenado && i < n - 1) {
-        int puntosSiguiente = puntos(v[i + 1]);
-        ordenado = puntosActual <= puntosSiguiente;
-        i++;
-        puntosActual = puntosSiguiente;
+        /*
+        * Resolución del problema como la búsqueda de un par de componentes
+        * consecutivas en las que la primera corresponde a un conductor con
+        * más puntos que el de la componente siguiente. Si se encuentra tal
+        * par, no esta ordenado. En caso contrario, sí está ordenado.
+        */
+        unsigned i = 0;
+        int puntosActual = puntos(v[0]);
+        bool ordenado = true;
+        while (ordenado && i < n - 1) {
+            int puntosSiguiente = puntos(v[i + 1]);
+            ordenado = puntosActual <= puntosSiguiente;
+            i++;
+            puntosActual = puntosSiguiente;
+        }
+        // i >= n-1 || !ordenado
+        return ordenado;
     }
-    // i >= n-1 || !ordenado
-    return ordenado;
-}
 }
 
 
