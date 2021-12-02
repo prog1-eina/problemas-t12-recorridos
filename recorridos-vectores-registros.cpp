@@ -161,9 +161,9 @@ void purgar(const Permiso v[], const unsigned nV, Permiso resultado[],
  *       «v» están ordenadas de forma que los permisos de sus componentes tienen
  *       valores de puntos no decrecientes.
  */
-bool estaOrdenadaPorPuntos(const Permiso v[], const unsigned n) {
+bool estaOrdenadoPorPuntos(const Permiso v[], const unsigned n) {
     if (n == 0) {
-        // Hay cero componentes y está trivialmente ordendada
+        // Hay cero componentes y está trivialmente ordendado
         return true;
     }
     else {
@@ -171,19 +171,19 @@ bool estaOrdenadaPorPuntos(const Permiso v[], const unsigned n) {
      * Resolución del problema como la búsqueda de un par de componentes
      * consecutivas en las que la primera corresponde a un conductor con
      * más puntos que el de la componente siguiente. Si se encuentra tal
-     * par, no esta ordenada. En caso contrario, sí está ordenada
+     * par, no esta ordenado. En caso contrario, sí está ordenado.
      */
     unsigned i = 0;
     int puntosActual = puntos(v[0]);
-    bool ordenada = true;
-    while (ordenada && i < n - 1) {
+    bool ordenado = true;
+    while (ordenado && i < n - 1) {
         int puntosSiguiente = puntos(v[i + 1]);
-        ordenada = puntosActual <= puntosSiguiente;
+        ordenado = puntosActual <= puntosSiguiente;
         i++;
         puntosActual = puntosSiguiente;
     }
-    // i >= n-1 || !ordenada
-    return ordenada;
+    // i >= n-1 || !ordenado
+    return ordenado;
 }
 }
 
@@ -191,28 +191,28 @@ bool estaOrdenadaPorPuntos(const Permiso v[], const unsigned n) {
 /*
  * Pre:  «v» tiene al menos «n» componentes.
  * Post: Ha devuelto true si y solo si las primeras «n» componentes del vector
- *       «v» están clasificadas de forma tal que todos los permisos
+ *       «v» están distribuidas de forma tal que todos los permisos
  *       correspondientes a conductores noveles aparecen primero (en las
  *       componentes de índices más bajos) y todos los correspondientes a
  *       conductores experimentados, después (en las componentes de índices más
  *       altos).
  */
-bool estaOrdenadaPorNovel(const Permiso v[], const unsigned n) {
+bool estaDistribuidoPorNovel(const Permiso v[], const unsigned n) {
     /*
      * Resolución del problema como la búsqueda de un par de componentes
      * consecutivas en las que la primera corresponde a un conductor
      * experimentado y la segunda a un conductor novel. Si se
-     * encuentra tal par, no esta ordenada. En caso contrario, sí está
-     * ordenada
+     * encuentra tal par, no esta ordenado. En caso contrario, sí está
+     * ordenado.
      */
     unsigned i = 1;
-    bool ordenada = true;
-    while (ordenada && i < n) {
-        ordenada = !(!esNovel(v[i - 1]) && esNovel(v[i]));
+    bool ordenado = true;
+    while (ordenado && i < n) {
+        ordenado = !(!esNovel(v[i - 1]) && esNovel(v[i]));
         i++;
     }
-    // i >= n-1 || !ordenada
-    return ordenada;
+    // i >= n-1 || !ordenado
+    return ordenado;
 }
 
 
