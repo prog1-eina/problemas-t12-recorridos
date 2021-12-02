@@ -45,5 +45,5 @@ ifeq ($(OS),Windows_NT)
 	if exist $(BIN_DIR) rmdir /S /Q $(BIN_DIR)
 	if exist $(BUILD_DIR) rmdir /S /Q $(BUILD_DIR)
 else
-	rm -f $(OBJECTS) $(TESTING_OBJECTS) $(BIN_DIR)/*
+	rm -f $(RECORRIDOS_PERMISOS_OBJECTS) $(BIN_DIR)/*
 endif
