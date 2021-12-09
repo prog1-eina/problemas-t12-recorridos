@@ -26,7 +26,7 @@ RECORRIDOS_PERMISOS_OBJECTS = $(addprefix $(BUILD_DIR)/, permiso.o \
 ## Reglas del fichero «Makefile»
 
 recorridos: $(RECORRIDOS_PERMISOS_OBJECTS) | $(BIN_DIR)
-	$(CXX) -g -o $(BIN_DIR)/$@ $^ -static
+	$(CXX) -g -o $(BIN_DIR)/$@ $^
 
 $(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@  
