@@ -104,7 +104,7 @@ int buscarPorPuntos(const Permiso v[], const unsigned n, const int puntosBuscado
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Recorre las primeras «n» componentes el vector «v», aumentando la
+ * Post: Recorre las primeras «n» componentes del vector «v», aumentando la
  *       antigüedad de todos los permisos en un mes.
  */
 void actualizarMes(Permiso v[], const unsigned n) {
@@ -116,7 +116,7 @@ void actualizarMes(Permiso v[], const unsigned n) {
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Recorre las primeras «n» componentes el vector «v» y, cuando encuentra 
+ * Post: Recorre las primeras «n» componentes del vector «v» y, cuando encuentra 
  *       permisos en ellas correspondientes a conductores que han dejado de ser
  *       noveles (conductores con exactamente 12 meses de antigüedad), les
  *       bonifica con 4 puntos. Devuelve el número de permisos de conductores a
