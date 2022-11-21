@@ -9,7 +9,7 @@ Se recomienda **no consultar** estas soluciones hasta **después** de haber resu
 ## Compilación y ejecución
 
 El fichero `recorridos-vectores-registros.cpp` necesita del módulo «permiso»
-del directorio `permisos-conducir` de la [clase de problemas anterior a esta](https://miguel-latre.github.io/transparencias/pbs-tema-11-registros.pdf).
+del directorio `permisos-conducir` de la [clase de problemas anterior a esta](https://miguel-latre.github.io/transparencias/pbs-tema-11-registros.pdf). El fichero `Makefile` ha sido escrito considerando que dicho módulo se encuentra en un directorio denominado `permisos-conducir` dentro de un directorio `problemas-t11-registros` ubicado en la misma carpeta que el directorio correspondiente a estas soluciones (`problemas-t12-recorridos`). La ruta a este módulo puede modificarse en el propio fichero `Makefile` si fuese preciso.
 
 Para compilarlo, hay que ejecutar el comando
 

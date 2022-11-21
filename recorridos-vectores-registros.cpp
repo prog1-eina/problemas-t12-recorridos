@@ -9,7 +9,14 @@
  *          de problemas del recorrido de vectores
  * Dependencias: módulo «permiso», ubicado en el directorio
  *               del repositorio de los problemas del tema 11 (registros).
- * Nota: El código de este programa está repartido en varios módulos.
+ * Nota: El código de este programa está repartido en varios módulos. El fichero
+ *       «Makefile» ha sido escrito considerando que dicho módulo se encuentra
+ *       en un directorio denominado «permisos-conducir» dentro de un directorio
+ *       «problemas-t11-registros» ubicado en la misma carpeta que el directorio
+ *       correspondiente a estas soluciones («problemas-t12-recorridos»). La
+ *       ruta a este módulo puede modificarse en el propio fichero «Makefile» si
+ *       fuese preciso.
+ * 
  *       Para compilarlo, hay que ejecutar el comando
  *           make recorridos
  *       o, en Windows,
@@ -23,13 +30,13 @@
  *       o ejecutar la tarea "Ejecutar «recorridos»" de VSC.
 \******************************************************************************/
 
-#include "permiso.hpp"
 #include <iostream>
+#include "permiso.hpp"
 using namespace std;
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Ha devuelto el número de permisos de conducir de las primeras «n»
+ * Post: Devuelve el número de permisos de conducir de las primeras «n»
  *       componentes del vector «v» con una cantidad de puntos negativa o igual 
  *       a 0.
  */
@@ -47,7 +54,7 @@ unsigned contarSinPuntos(const Permiso v[], const unsigned n) {
 
 /*
  * Pre:  «v» tiene al menos «n» componentes y «n» > 0.
- * Post: Ha devuelto el permiso de conducir de entre las primeras «n»
+ * Post: Devuelve el permiso de conducir de entre las primeras «n»
  *       componentes del vector «v» que tiene el menor saldo de puntos.
  */
 Permiso peorConductor(const Permiso v[], const unsigned n) {
@@ -67,8 +74,8 @@ Permiso peorConductor(const Permiso v[], const unsigned n) {
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Ha devuelto un índice de una componente de entre las primeras «n»
- *       componentes del vector «v» que contiene un permiso con un
+ * Post: Devuelve el índice de una componente de entre las primeras «n»
+ *       componentes del vector «v» que contiene un permiso con
  *       «puntosBuscados» puntos, o un valor negativo si no existe ninguno en el vector.
  */
 int buscarPorPuntos(const Permiso v[], const unsigned n, const int puntosBuscados) {
@@ -97,8 +104,8 @@ int buscarPorPuntos(const Permiso v[], const unsigned n, const int puntosBuscado
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Ha recorrido las primeras «n» componentes el vector «v» y ha aumentado
- *       la antigüedad de todos los permisos en un mes.
+ * Post: Recorre las primeras «n» componentes el vector «v», aumentando la
+ *       antigüedad de todos los permisos en un mes.
  */
 void actualizarMes(Permiso v[], const unsigned n) {
     for (unsigned i = 0; i < n; i++) {
@@ -109,12 +116,11 @@ void actualizarMes(Permiso v[], const unsigned n) {
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Ha recorrido las primeras «n» componentes el vector «v» y, cuando ha
- *       encontrado permisos en ellas correspondientes a conductores que han
- *       dejado de ser noveles (conductores con exactamente 12 meses de
- *       antigüedad), les ha bonificado con 4 puntos.
- *       Ha devuelto el número de permisos de conductores a los que se ha
- *       bonificado por dejar de ser noveles.
+ * Post: Recorre las primeras «n» componentes el vector «v» y, cuando encuentra 
+ *       permisos en ellas correspondientes a conductores que han dejado de ser
+ *       noveles (conductores con exactamente 12 meses de antigüedad), les
+ *       bonifica con 4 puntos. Devuelve el número de permisos de conductores a
+ *       los que se bonifica por dejar de ser noveles.
  */
 unsigned bonificarPorDejarDeSerNovel(Permiso v[], const unsigned n) {
     unsigned cuenta = 0;
@@ -157,13 +163,13 @@ void purgar(const Permiso v[], const unsigned nV, Permiso resultado[],
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Ha devuelto «true» si y solo si las primeras «n» componentes del vector
+ * Post: Devuelve «true» si y solo si las primeras «n» componentes del vector
  *       «v» están ordenadas de forma que los permisos de sus componentes tienen
  *       valores de puntos no decrecientes.
  */
 bool estaOrdenadoPorPuntos(const Permiso v[], const unsigned n) {
     if (n == 0) {
-        // Hay cero componentes y está trivialmente ordendado
+        // Hay cero componentes y está trivialmente ordenado
         return true;
     }
     else {
@@ -190,7 +196,7 @@ bool estaOrdenadoPorPuntos(const Permiso v[], const unsigned n) {
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Ha devuelto true si y solo si las primeras «n» componentes del vector
+ * Post: Devuelve true si y solo si las primeras «n» componentes del vector
  *       «v» están distribuidas de forma tal que todos los permisos
  *       correspondientes a conductores noveles aparecen primero (en las
  *       componentes de índices más bajos) y todos los correspondientes a
@@ -289,10 +295,10 @@ void clasificarPorNovel(Permiso v[], const unsigned n) {
      * Al acabar el bucle, se siguen cumpliendo INV1, INV2, INV3.
      * Además, inferior >= superior, con lo que el intervalo
      * [inferior, superior] que se menciona en INV3 se refiere a uno o ningún
-     * índice: "Todas lascomponentes de índice menor que «inferior» corresponden
-     * a conductores noveles; todas las componentes de índice mayor que
-     * «superior» corresponden a conductores experimentados y en v[inferior] hay
-     * un conductor novel o experimentado".
+     * índice: "Todas las componentes de índice menor que «inferior»
+     * corresponden a conductores noveles; todas las componentes de índice mayor
+     * que «superior» corresponden a conductores experimentados y en v[inferior]
+     * hay un conductor novel o experimentado".
      *
      * Esto quiere decir que se cumple la postcondición: "Todos los permisos
      * correspondientes a conductores noveles aparecen primero (en las
@@ -334,6 +340,6 @@ void ordenarPorPuntos(Permiso v[], const unsigned n) {
  * escribir un programa de prueba de las funciones anteriores.
  */
 int main() {
-    cout << "Puedes escribir el programa de prueba" << endl;
+    cout << "Puedes escribir un programa de prueba." << endl;
     return 0;
 }
