@@ -85,8 +85,7 @@ int buscarPorPuntos(const Permiso v[], const unsigned n, const int puntosBuscado
     while (!encontrado && i < n) {
         if (puntos(v[i]) == puntosBuscados) {
             encontrado = true;
-        }
-        else {
+        } else {
             i++;
         }
     }
@@ -95,8 +94,7 @@ int buscarPorPuntos(const Permiso v[], const unsigned n, const int puntosBuscado
     // Determinación del éxito de la búsqueda y devolución de resultado
     if (encontrado) {
         return i;
-    }
-    else {
+    } else {
         return -1;
     }
 }
@@ -171,8 +169,7 @@ bool estaOrdenadoPorPuntos(const Permiso v[], const unsigned n) {
     if (n == 0) {
         // Hay cero componentes y está trivialmente ordenado
         return true;
-    }
-    else {
+    } else {
         /*
         * Resolución del problema como la búsqueda de un par de componentes
         * consecutivas en las que la primera corresponde a un conductor con
