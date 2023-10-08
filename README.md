@@ -15,10 +15,6 @@ Para compilarlo, hay que ejecutar el comando
 
     make recorridos
 
-o, en Windows,
-
-    mingw32-make recorridos
-
 o ejecutar la tarea ``Compilar «recorridos»`` de VSC.
 
 No se proporciona un programa de pruebas esta vez, pero puede utilizarse la función main del fichero `recorridos-vectores-registros.cpp` para escribir uno.

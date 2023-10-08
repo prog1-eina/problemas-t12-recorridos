@@ -19,9 +19,7 @@
  * 
  *       Para compilarlo, hay que ejecutar el comando
  *           make recorridos
- *       o, en Windows,
- *           mingw32-make recorridos
- *       o ejecutar la tarea "Compilar «recorridos»" de VSC.
+  *       o ejecutar la tarea "Compilar «recorridos»" de VSC.
  * 
  *       Para ejecutarlo, una vez compilado, hay que ejecutar el comando
  *           bin/recorridos
@@ -291,7 +289,7 @@ void clasificarPorNovel(Permiso v[], const unsigned n) {
     /*
      * Al acabar el bucle, se siguen cumpliendo INV1, INV2, INV3.
      * Además, inferior >= superior, con lo que el intervalo
-     * [inferior, superior] que se menciona en INV3 se refiere a uno o ningún
+     * [inferior, superior] que se menciona en INV3 se refiere a uno o ningún
      * índice: "Todas las componentes de índice menor que «inferior»
      * corresponden a conductores noveles; todas las componentes de índice mayor
      * que «superior» corresponden a conductores experimentados y en v[inferior]

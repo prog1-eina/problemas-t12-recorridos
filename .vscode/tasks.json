@@ -10,9 +10,6 @@
             "label": "Compilar «recorridos»",
             "type": "shell",
             "command": "make",
-            "windows": {
-                "command": "mingw32-make.exe",
-            },
             "args": [
                 "recorridos"
             ],
