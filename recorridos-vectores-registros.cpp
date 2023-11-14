@@ -180,10 +180,9 @@ bool estaOrdenadoPorPuntos(const Permiso v[], const unsigned n) {
         while (ordenado && i < n - 1) {
             int puntosSiguiente = puntos(v[i + 1]);
             ordenado = puntosActual <= puntosSiguiente;
-            i++;
             puntosActual = puntosSiguiente;
+            i++;
         }
-        // i >= n-1 || !ordenado
         return ordenado;
     }
 }
@@ -203,17 +202,16 @@ bool estaDistribuidoPorNovel(const Permiso v[], const unsigned n) {
      * Resolución del problema como la búsqueda de un par de componentes
      * consecutivas en las que la primera corresponde a un conductor
      * experimentado y la segunda a un conductor novel. Si se
-     * encuentra tal par, no esta ordenado. En caso contrario, sí está
-     * ordenado.
+     * encuentra tal par, no esta ordenado. En caso contrario, sí está ordenado.
      */
     unsigned i = 1;
-    bool ordenado = true;
-    while (ordenado && i < n) {
-        ordenado = !(!esNovel(v[i - 1]) && esNovel(v[i]));
+    bool distribuido = true;
+    while (distribuido && i < n) {
+        distribuido = !(!esNovel(v[i - 1]) && esNovel(v[i]));
         i++;
     }
-    // i >= n-1 || !ordenado
-    return ordenado;
+    // !distribuido || i >= n-1
+    return distribuido;
 }
 
 
