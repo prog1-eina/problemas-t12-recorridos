@@ -204,13 +204,13 @@ bool estaDistribuidoPorNovel(const Permiso v[], const unsigned n) {
      * experimentado y la segunda a un conductor novel. Si se
      * encuentra tal par, no esta ordenado. En caso contrario, sí está ordenado.
      */
-    unsigned i = 1;
+    unsigned i = 0;
     bool distribuido = true;
-    while (distribuido && i < n) {
-        distribuido = !(!esNovel(v[i - 1]) && esNovel(v[i]));
-        i++;
+    while (distribuido && i < n - 1) {
+        distribuido = !(!esNovel(v[i]) && esNovel(v[i + 1]));
+        i++; 
     }
-    // !distribuido || i >= n-1
+    // !distribuido || i >= n - 1
     return distribuido;
 }
 
