@@ -142,7 +142,7 @@ unsigned bonificarPorDejarDeSerNovel(Permiso v[], const unsigned n) {
  *       positivo.
  */
 void purgar(const Permiso v[], const unsigned nV, Permiso resultado[],
-            unsigned& nR) {
+            unsigned &nR) {
     nR = 0; // Cuenta el número de permisos con puntos positivos y va a servir
             // como cursor para indexar el vector «resultado».
 
@@ -219,7 +219,7 @@ bool estaDistribuidoPorNovel(const Permiso v[], const unsigned n) {
  * Pre:  uno = A y otro = B
  * Post: uno = B y otro = A
  */
-void permutar(Permiso& uno, Permiso& otro) {
+void permutar(Permiso &uno, Permiso &otro) {
     Permiso aux = uno;
     uno = otro;
     otro = aux;
