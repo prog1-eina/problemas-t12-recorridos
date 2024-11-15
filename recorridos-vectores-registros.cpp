@@ -19,7 +19,7 @@
  * 
  *       Para compilarlo, hay que ejecutar el comando
  *           make recorridos
-  *       o ejecutar la tarea "Compilar «recorridos»" de VSC.
+ *       o ejecutar la tarea "Compilar «recorridos»" de VSC.
  * 
  *       Para ejecutarlo, una vez compilado, hay que ejecutar el comando
  *           bin/recorridos
