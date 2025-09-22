@@ -1,4 +1,4 @@
-﻿/******************************************************************************\
+﻿/******************************************************************************
  * Curso de Programación 1. Tema 12 (Algoritmos con vectores)
  * Autores: Miguel Ángel Latre
  * Última revisión: 24 de noviembre de 2020
@@ -9,13 +9,13 @@
  *          de problemas del recorrido de vectores
  * Dependencias: módulo «permiso», ubicado en el directorio
  *               del repositorio de los problemas del tema 11 (registros).
- * Nota: El código de este programa está repartido en varios módulos. El fichero
- *       «Makefile» ha sido escrito considerando que dicho módulo se encuentra
- *       en un directorio denominado «permisos-conducir» dentro de un directorio
- *       «problemas-t11-registros» ubicado en la misma carpeta que el directorio
- *       correspondiente a estas soluciones («problemas-t12-recorridos»). La
- *       ruta a este módulo puede modificarse en el propio fichero «Makefile» si
- *       fuese preciso.
+ * Nota: El código de este programa está repartido en varios módulos. El
+ *       fichero «Makefile» ha sido escrito considerando que dicho módulo se
+ *       encuentra en un directorio denominado «permisos-conducir» dentro de un
+ *       directorio «problemas-t11-registros» ubicado en la misma carpeta que
+ *       el directorio correspondiente a estas soluciones
+ *       («problemas-t12-recorridos»). La ruta a este módulo puede modificarse
+ *       en el propio fichero «Makefile» si fuese preciso.
  * 
  *       Para compilarlo, hay que ejecutar el comando
  *           make recorridos
@@ -26,7 +26,7 @@
  *       o, en Windows,
  *           bin\recorridos.exe
  *       o ejecutar la tarea "Ejecutar «recorridos»" de VSC.
-\******************************************************************************/
+ *****************************************************************************/
 
 #include <iostream>
 #include "permiso.hpp"
@@ -35,7 +35,7 @@ using namespace std;
 /*
  * Pre:  «v» tiene al menos «n» componentes.
  * Post: Devuelve el número de permisos de conducir de las primeras «n»
- *       componentes del vector «v» con una cantidad de puntos negativa o igual 
+ *       componentes del vector «v» con una cantidad de puntos negativa o igual
  *       a 0.
  */
 unsigned contarSinPuntos(const Permiso v[], const unsigned n) {
@@ -74,9 +74,11 @@ Permiso peorConductor(const Permiso v[], const unsigned n) {
  * Pre:  «v» tiene al menos «n» componentes.
  * Post: Devuelve el índice de una componente de entre las primeras «n»
  *       componentes del vector «v» que contiene un permiso con
- *       «puntosBuscados» puntos, o un valor negativo si no existe ninguno en el vector.
+ *       «puntosBuscados» puntos, o un valor negativo si no existe ninguno en
+ *       el vector.
  */
-int buscarPorPuntos(const Permiso v[], const unsigned n, const int puntosBuscados) {
+int buscarPorPuntos(const Permiso v[], const unsigned n,
+                    const int puntosBuscados) {
     // Esquema de búsqueda sin garantía de éxito
     bool encontrado = false;
     unsigned i = 0;
@@ -112,11 +114,11 @@ void actualizarMes(Permiso v[], const unsigned n) {
 
 /*
  * Pre:  «v» tiene al menos «n» componentes.
- * Post: Recorre las primeras «n» componentes del vector «v» y, cuando encuentra 
- *       permisos en ellas correspondientes a conductores que han dejado de ser
- *       noveles (conductores con exactamente 12 meses de antigüedad), les
- *       bonifica con 4 puntos. Devuelve el número de permisos de conductores a
- *       los que se bonifica por dejar de ser noveles.
+ * Post: Recorre las primeras «n» componentes del vector «v» y, cuando
+ *       encuentra  permisos en ellas correspondientes a conductores que han
+ *       dejado de ser noveles (conductores con exactamente 12 meses de
+ *       antigüedad), les bonifica con 4 puntos. Devuelve el número de permisos
+ *       de conductores a los que se bonifica por dejar de ser noveles.
  */
 unsigned bonificarPorDejarDeSerNovel(Permiso v[], const unsigned n) {
     unsigned cuenta = 0;
@@ -160,8 +162,8 @@ void purgar(const Permiso v[], const unsigned nV, Permiso resultado[],
 /*
  * Pre:  «v» tiene al menos «n» componentes.
  * Post: Devuelve «true» si y solo si las primeras «n» componentes del vector
- *       «v» están ordenadas de forma que los permisos de sus componentes tienen
- *       valores de puntos no decrecientes.
+ *       «v» están ordenadas de forma que los permisos de sus componentes
+ *       tienen valores de puntos no decrecientes.
  */
 bool estaOrdenadoPorPuntos(const Permiso v[], const unsigned n) {
     if (n == 0) {
@@ -201,8 +203,8 @@ bool estaDistribuidoPorNovel(const Permiso v[], const unsigned n) {
     /*
      * Resolución del problema como la búsqueda de un par de componentes
      * consecutivas en las que la primera corresponde a un conductor
-     * experimentado y la segunda a un conductor novel. Si se
-     * encuentra tal par, no esta ordenado. En caso contrario, sí está ordenado.
+     * experimentado y la segunda a un conductor novel. Si se encuentra tal
+     * par, no esta ordenado. En caso contrario, sí está ordenado.
      */
     unsigned i = 0;
     bool distribuido = true;
@@ -229,23 +231,23 @@ void permutar(Permiso &uno, Permiso &otro) {
 /*
  * Pre:  «v» tiene al menos «n» componentes.
  * Post: Las primeras «n» componentes del vector «v» son una permutación de los
- *       permisos que había inicialmente en esas mismas primeras «n» componentes
- *       del vector «v» y están clasificadas de forma que todos los permisos
- *       correspondientes a conductores noveles aparecen primero (en las
- *       componentes de índices más bajos) y todos los correspondientes a
+ *       permisos que había inicialmente en esas mismas primeras «n»
+ *       componentes del vector «v» y están clasificadas de forma que todos los
+ *       permisos correspondientes a conductores noveles aparecen primero (en
+ *       las componentes de índices más bajos) y todos los correspondientes a
  *       conductores experimentados, después (en las componentes de índices más
  *       altos).
  */
 void clasificarPorNovel(Permiso v[], const unsigned n) {
     /*
-     * INV1: Todas las componentes de índice menor que «inferior» corresponden a
-     *       conductores noveles.
+     * INV1: Todas las componentes de índice menor que «inferior» corresponden
+     *       a conductores noveles.
      */
     int inferior = 0;
 
     /*
-     * INV2: Todas las componentes de índice mayor que «superior» corresponden a
-     *       conductores experimentados.
+     * INV2: Todas las componentes de índice mayor que «superior» corresponden
+     *       a conductores experimentados.
      */
     int superior = n - 1;
 
@@ -289,9 +291,9 @@ void clasificarPorNovel(Permiso v[], const unsigned n) {
      * Además, inferior >= superior, con lo que el intervalo
      * [inferior, superior] que se menciona en INV3 se refiere a uno o ningún
      * índice: "Todas las componentes de índice menor que «inferior»
-     * corresponden a conductores noveles; todas las componentes de índice mayor
-     * que «superior» corresponden a conductores experimentados y en v[inferior]
-     * hay un conductor novel o experimentado".
+     * corresponden a conductores noveles; todas las componentes de índice
+     * mayor que «superior» corresponden a conductores experimentados y en
+     * v[inferior] hay un conductor novel o experimentado".
      *
      * Esto quiere decir que se cumple la postcondición: "Todos los permisos
      * correspondientes a conductores noveles aparecen primero (en las
@@ -304,9 +306,9 @@ void clasificarPorNovel(Permiso v[], const unsigned n) {
 /*
  * Pre:  «v» tiene al menos «n» componentes.
  * Post: Las primeras «n» componentes del vector «v» son una permutación de los
- *       permisos que había inicialmente en esas mismas primeras «n» componentes
- *       del vector «v» y están ordenadas de forma que tienen valores de puntos
- *       no decrecientes.
+ *       permisos que había inicialmente en esas mismas primeras «n»
+ *       componentes del vector «v» y están ordenadas de forma que tienen
+ *       valores de puntos no decrecientes.
  */
 void ordenarPorPuntos(Permiso v[], const unsigned n) {
     if (n != 0) {
