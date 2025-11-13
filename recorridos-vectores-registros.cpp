@@ -10,10 +10,10 @@
  * Dependencias: módulo «permiso», ubicado en el directorio
  *               del repositorio de los problemas del tema 11 (registros).
  * Nota: El código de este programa está repartido en varios módulos. El
- *       fichero «Makefile» ha sido escrito considerando que dicho módulo se
- *       encuentra en un directorio denominado «permisos-conducir» dentro de un
- *       directorio «problemas-t11-registros» ubicado en la misma carpeta que
- *       el directorio correspondiente a estas soluciones
+ *       fichero «Makefile» ha sido escrito considerando que el módulo
+ *       «permiso» se encuentra en un directorio denominado «permisos-conducir»
+ *       dentro de un directorio «problemas-t11-registros» ubicado en la misma
+ *       carpeta que el directorio correspondiente a estas soluciones
  *       («problemas-t12-recorridos»). La ruta a este módulo puede modificarse
  *       en el propio fichero «Makefile» si fuese preciso.
  * 
