@@ -166,27 +166,22 @@ void purgar(const Permiso v[], const unsigned nV, Permiso resultado[],
  *       tienen valores de puntos no decrecientes.
  */
 bool estaOrdenadoPorPuntos(const Permiso v[], const unsigned n) {
-    if (n == 0) {
-        // Hay cero componentes y está trivialmente ordenado
-        return true;
-    } else {
-        /*
-        * Resolución del problema como la búsqueda de un par de componentes
-        * consecutivas en las que la primera corresponde a un conductor con
-        * más puntos que el de la componente siguiente. Si se encuentra tal
-        * par, no esta ordenado. En caso contrario, sí está ordenado.
-        */
-        unsigned i = 0;
-        int puntosActual = puntos(v[0]);
-        bool ordenado = true;
-        while (ordenado && i < n - 1) {
-            int puntosSiguiente = puntos(v[i + 1]);
-            ordenado = puntosActual <= puntosSiguiente;
-            puntosActual = puntosSiguiente;
-            i++;
-        }
-        return ordenado;
+    /*
+     * Resolución del problema como la búsqueda de un par de componentes
+     * consecutivas en las que la primera corresponde a un conductor con
+     * más puntos que el de la componente siguiente. Si se encuentra tal
+     * par, no esta ordenado. En caso contrario, sí está ordenado.
+     */
+    unsigned i = 1;
+    int puntosAnterior = puntos(v[0]);
+    bool ordenado = true;
+    while (ordenado && i < n) {
+        int puntosActual = puntos(v[i]);
+        ordenado = puntosAnterior <= puntosActual;
+        puntosAnterior = puntosActual;
+        i++;
     }
+    return ordenado;
 }
 
 
@@ -206,13 +201,13 @@ bool estaDistribuidoPorNovel(const Permiso v[], const unsigned n) {
      * experimentado y la segunda a un conductor novel. Si se encuentra tal
      * par, no esta ordenado. En caso contrario, sí está ordenado.
      */
-    unsigned i = 0;
+    unsigned i = 1;
     bool distribuido = true;
-    while (distribuido && i < n - 1) {
-        distribuido = !(!esNovel(v[i]) && esNovel(v[i + 1]));
+    while (distribuido && i < n) {
+        distribuido = !(!esNovel(v[i - 1]) && esNovel(v[i]));
         i++; 
     }
-    // !distribuido || i >= n - 1
+    // !distribuido || i >= n
     return distribuido;
 }
 
