@@ -15,7 +15,7 @@ VPATH = $(SOURCE_DIR) $(PERMISOS_DIR)
 
 ## COMPILADOR Y OPCIONES DE COMPILACIÓN:
 CXX = g++
-CXXFLAGS = -g -Wall -Wextra -I$(PERMISOS_DIR)
+CXXFLAGS = -Og -Wall -Wextra -I$(PERMISOS_DIR)
 
 
 ## FICHEROS OBJETO (RESULTADOS INTERMEDIOS DE COMPILACIÓN):
@@ -26,7 +26,7 @@ RECORRIDOS_PERMISOS_OBJECTS = $(addprefix $(BUILD_DIR)/, permiso.o \
 ## Reglas del fichero «Makefile»
 
 recorridos: $(RECORRIDOS_PERMISOS_OBJECTS) | $(BIN_DIR)
-	$(CXX) -g -o $(BIN_DIR)/$@ $^
+	$(CXX) -Og -o $(BIN_DIR)/$@ $^
 
 $(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@  
